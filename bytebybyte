@@ -1,0 +1,24 @@
+import java.io.*;
+
+public class ByteHandlingExample {
+    public static void main(String[] args) {
+        String message = "Hello, Byte Stream!";
+        byte[] data = message.getBytes(); // Convert string to byte array
+
+        try (OutputStream outputStream = new FileOutputStream("output.txt")) {
+            outputStream.write(data); // Write bytes to file
+            System.out.println("Data written to file successfully.");
+        } catch (IOException e) {
+            System.err.println("Error writing data to file: " + e.getMessage());
+        }
+
+        try (InputStream inputStream = new FileInputStream("output.txt")) {
+            int byteData;
+            while ((byteData = inputStream.read()) != -1) {
+                System.out.print((char) byteData); // Convert byte to char and print
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading data from file: " + e.getMessage());
+        }
+    }
+}
